@@ -13,14 +13,8 @@ interface UserApi {
     suspend fun getUserList(@QueryMap filters: HashMap<String, String> = hashMapOf()): Response<List<UserResponse>>
 
     @POST("users")
-    fun createUser(
+    suspend fun createUser(
         @Body userReqBody: UserReqBody
-    ): Call<String>
+    ): Response<String>
 
-    @Multipart
-    @POST("users/{id}/image")
-    fun uploadImage(
-        @Path("id") id: String,
-        @Part image: MultipartBody.Part
-    ): Call<Any>
 }
