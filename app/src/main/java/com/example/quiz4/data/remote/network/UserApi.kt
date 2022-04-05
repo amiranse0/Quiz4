@@ -1,5 +1,6 @@
 package ir.mohsenafshar.apps.mkbarchitecture.data.remote.network
 
+import com.example.quiz4.data.remote.model.UserDetail
 import ir.mohsenafshar.apps.mkbarchitecture.data.remote.model.UserReqBody
 import ir.mohsenafshar.apps.mkbarchitecture.data.remote.model.UserResponse
 import okhttp3.MultipartBody
@@ -16,5 +17,8 @@ interface UserApi {
     suspend fun createUser(
         @Body userReqBody: UserReqBody
     ): Response<String>
+
+    @GET("users/{userId}")
+    fun getUserDetails(@Path("userId") userId:String):Call<UserDetail>
 
 }

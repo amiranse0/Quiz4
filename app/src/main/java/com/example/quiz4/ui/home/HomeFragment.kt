@@ -41,11 +41,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun goToDetails() {
         recyclerAdaptor.setToClickOnTask(object : MyRecyclerAdaptor.ClickOnTask {
             override fun clickOnTask(position: Int, view: View?) {
-                val userDetail =
-                    "firstname: ${items[position].firstName} \nlastname: ${items[position].lastName} \nhobies:${items[position].hobbies} \nnationalCode: ${items[position].nationalCode}"
                 findNavController().navigate(
                     R.id.action_homeFragment_to_detailFragment,
-                    bundleOf("detail" to userDetail)
+                    bundleOf("detail" to items[position]._id)
                 )
             }
         })
