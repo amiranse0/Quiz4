@@ -34,7 +34,6 @@ class DetailFragment:Fragment(R.layout.fragment_detail) {
 
         val id = arguments?.getString("detail")?:""
 
-        Log.d("TAG", id)
 
         viewModel.getUserDetail(id).observe(viewLifecycleOwner){
             Glide.with(requireContext())

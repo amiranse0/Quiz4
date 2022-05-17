@@ -23,7 +23,7 @@ class AddDialogFragment : DialogFragment(R.layout.fragment_dialog_add) {
 
     private fun createUser() {
         binding.submitButton.setOnClickListener {
-            var hobbies = mutableListOf<String>()
+            val hobbies = mutableListOf<String>()
             if (binding.filmCheckBox.isChecked) hobbies.add("Film")
             if (binding.sportCheckBox.isChecked) hobbies.add("Sport")
             if (binding.footballCheckBox.isChecked) hobbies.add("Football")

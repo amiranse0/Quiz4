@@ -24,7 +24,7 @@ object RetrofitApiProvider {
         .build()
 
     private val retrofit = Retrofit.Builder()
-        .baseUrl("http://papp.ir/api/v1/")
+        .baseUrl("http://51.195.19.222:3000/api/v1/")
         .addConverterFactory(GsonConverterFactory.create())
         .client(client)
         .build()

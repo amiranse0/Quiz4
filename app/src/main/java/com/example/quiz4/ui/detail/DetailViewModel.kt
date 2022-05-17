@@ -1,6 +1,5 @@
 package com.example.quiz4.ui.detail
 
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,8 +15,6 @@ class DetailViewModel(private val repository: UserRepository) : ViewModel() {
     fun getUserDetail(id: String):LiveData<UserDetail> {
         val detailLiveData = MutableLiveData<UserDetail>()
         viewModelScope.launch(Dispatchers.IO) {
-            val detail = repository.getUserDetail(id).await()
-            detailLiveData.postValue(detail)
         }
         return detailLiveData
     }

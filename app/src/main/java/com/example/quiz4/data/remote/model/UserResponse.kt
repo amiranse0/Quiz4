@@ -1,6 +1,5 @@
 package ir.mohsenafshar.apps.mkbarchitecture.data.remote.model
 
-import com.google.gson.annotations.SerializedName
 
 data class UserResponse(
     val _id: String,

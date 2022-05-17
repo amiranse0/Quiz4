@@ -11,14 +11,14 @@ import retrofit2.http.*
 interface UserApi {
 
     @GET("users")
-    suspend fun getUserList(@QueryMap filters: HashMap<String, String> = hashMapOf()): Response<List<UserResponse>>
+    suspend fun getUserList(@QueryMap filters: HashMap<String, String> = hashMapOf()): List<UserResponse>
 
     @POST("users")
     suspend fun createUser(
         @Body userReqBody: UserReqBody
-    ): Response<String>
+    ): String
 
     @GET("users/{userId}")
-    fun getUserDetails(@Path("userId") userId:String):Call<UserDetail>
+    fun getUserDetails(@Path("userId") userId:String): UserDetail
 
 }
