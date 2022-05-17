@@ -101,9 +101,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             viewModel.userStateFlow.collect {
                 when (it) {
                     is Result.Success -> {
+                        binding.pb2.visibility = View.GONE
                         items.clear()
                         items.addAll(it.data)
                         recyclerAdaptor.notifyDataSetChanged()
+                    }
+                    is Result.Loading ->{
+                        binding.pb2.visibility = View.VISIBLE
                     }
                 }
             }

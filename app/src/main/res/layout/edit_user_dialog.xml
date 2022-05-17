@@ -13,8 +13,8 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="300dp"
+        android:layout_height="500dp">
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -27,6 +27,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/first_name_input"
+                android:hint="firstName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@{user.firstName}" />
@@ -42,6 +43,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/last_name_input"
+                android:hint="lastName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@{user.lastName}" />
@@ -57,11 +59,11 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/national_code_input"
+                android:hint="national Code"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@{user.nationalCode}" />
         </com.google.android.material.textfield.TextInputLayout>
-
 
 
         <Button
@@ -71,7 +73,39 @@
             android:text="submit"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/football_check_box" />
+
+
+        <CheckBox
+            android:id="@+id/sport_check_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="sport"
+            android:checked='@{user.hobbies.toLowerCase().matches("sport")}'
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/national_code_input_layput" />
+
+        <CheckBox
+            android:id="@+id/film_check_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="film"
+            android:checked='@{user.hobbies.toLowerCase().matches("film")}'
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sport_check_box" />
+
+        <CheckBox
+            android:id="@+id/football_check_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="football"
+            android:checked='@{user.hobbies.toLowerCase().matches("football")}'
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/film_check_box" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

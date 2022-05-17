@@ -2,6 +2,7 @@ package com.example.quiz4.ui.dbui
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.quiz4.App
 import com.example.quiz4.R
 import com.example.quiz4.data.Result
+import com.example.quiz4.data.local.User
 import com.example.quiz4.databinding.UsersInDbBinding
 import com.example.quiz4.ui.home.MyRecyclerAdaptor
 import com.example.taskmanager.ui.home.viewmodel.CustomViewModelFactory
@@ -46,6 +48,19 @@ class UserDBFragment : Fragment(R.layout.users_in_db) {
 
         editUser()
 
+        goToDetail()
+
+    }
+
+    private fun goToDetail() {
+        recyclerAdaptor.setToClickOnTask(object : MyRecyclerAdaptor.ClickOnTask {
+            override fun clickOnTask(position: Int, view: View?) {
+                findNavController().navigate(
+                    R.id.action_homeFragment_to_detailFragment,
+                    bundleOf("detail" to items[position]._id)
+                )
+            }
+        })
     }
 
     private fun editUser() {
@@ -62,12 +77,31 @@ class UserDBFragment : Fragment(R.layout.users_in_db) {
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                     val swipedPosition = viewHolder.adapterPosition
 
-                    val editUserDialog = EditUserDialog()
-                    editUserDialog.setGetUser(object :EditUserDialog.GetUser{
+                    val editUserDialog = EditUserDialog(items[swipedPosition])
+                    editUserDialog.setGetUser(object : EditUserDialog.GetUser {
                         override fun getUserFromDialog(user: UserReqBody) {
+                            viewModel.addNewUser(user)
 
+                            val oldUser = items[swipedPosition]
+                            viewModel.addNewUser(
+                                UserReqBody(
+                                    user.firstName,
+                                    user.hobbies,
+                                    user.lastName,
+                                    user.nationalCode
+                                )
+                            )
+                            viewModel.updateUser(
+                                User(
+                                oldUser._id,
+                                    user.firstName,
+                                    user.hobbies.toString(),
+                                    "",
+                                    user.lastName,
+                                    user.nationalCode
+                                )
+                            )
                         }
-
                     })
 
                     editUserDialog.show(parentFragmentManager, "edit")
@@ -116,11 +150,11 @@ class UserDBFragment : Fragment(R.layout.users_in_db) {
         recyclerView = binding.recDb
 
         lifecycleScope.launch {
-            viewModel.userStateFlow.collect {
-                when (it) {
+            viewModel.userStateFlow.collect { result ->
+                when (result) {
                     is Result.Success -> {
                         items.clear()
-                        val users = it.data.map {
+                        val users = result.data.map {
                             UserResponse(
                                 _id = it._id,
                                 firstName = it.firstName,

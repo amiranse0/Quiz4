@@ -18,7 +18,13 @@ class LocalDataSource(private val userDao: UserDao) {
     }
 
     suspend fun deleteUser(id: String){
-        val user = userDao.findWithId(id).first()
-        userDao.deleteUser(user)
+        val userList = userDao.findWithId(id)
+        if (userList.size == 1){
+            userDao.deleteUser(userList.first())
+        }
+    }
+
+    suspend fun updateUser(user: User){
+        userDao.updateUser(user)
     }
 }

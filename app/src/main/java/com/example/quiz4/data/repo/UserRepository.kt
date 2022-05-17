@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.flow
 import java.lang.Exception
 import com.example.quiz4.data.Result
 import com.example.quiz4.data.local.User
+import okhttp3.MultipartBody
 
 class UserRepository(
     private val remoteDataSource: RemoteDataSource,
@@ -65,4 +66,12 @@ class UserRepository(
         localDataSource.deleteUser(id)
     }
 
+    suspend fun uploadImage(id: String, image:MultipartBody.Part){
+
+        remoteDataSource.uploadImage(id, image)
+    }
+
+    suspend fun updateUser(user: User){
+        localDataSource.updateUser(user)
+    }
 }

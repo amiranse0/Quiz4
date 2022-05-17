@@ -6,8 +6,14 @@ import androidx.lifecycle.viewModelScope
 import com.example.quiz4.data.Result
 import com.example.quiz4.data.remote.model.UserDetail
 import com.example.quiz4.data.repo.UserRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+
 
 class DetailViewModel(private val repository: UserRepository) : ViewModel() {
 
@@ -22,8 +28,18 @@ class DetailViewModel(private val repository: UserRepository) : ViewModel() {
     }
 
     fun getUserDetail(id: String) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             repository.getUserDetailFromServer(id).collect{_userDetailStateFlow.value = it}
+        }
+    }
+
+    fun uploadImage(id:String, image: ByteArray){
+
+        val imageMultiPart = RequestBody.create("image/*".toMediaTypeOrNull(), image)
+        val result = MultipartBody.Part.createFormData("image", "amirabbas.png", imageMultiPart)
+
+        viewModelScope.launch {
+            repository.uploadImage(id, result)
         }
     }
 }

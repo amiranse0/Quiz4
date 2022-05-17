@@ -19,6 +19,11 @@ interface UserApi {
     ): String
 
     @GET("users/{userId}")
-    fun getUserDetails(@Path("userId") userId:String): UserDetail
+    suspend fun getUserDetails(@Path("userId") userId:String): UserDetail
+
+    @Multipart
+    @POST("users/{userName}/image")
+    suspend fun sendProfileImage(@Path("userName") userName:String,
+                         @Part image: MultipartBody.Part)
 
 }

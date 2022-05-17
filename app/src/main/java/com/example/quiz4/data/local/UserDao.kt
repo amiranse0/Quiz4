@@ -21,4 +21,7 @@ interface UserDao {
     @Query("SELECT * FROM USER WHERE USER._id == :id")
     suspend fun findWithId(id:String): List<User>
 
+    @Update
+    suspend fun updateUser(user: User)
+
 }
