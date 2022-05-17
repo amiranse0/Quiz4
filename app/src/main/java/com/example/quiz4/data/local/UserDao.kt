@@ -1,9 +1,6 @@
 package com.example.quiz4.data.local
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.example.quiz4.data.remote.model.UserDetail
 
 @Dao
@@ -18,7 +15,10 @@ interface UserDao {
     @Delete
     suspend fun deleteUser(user: User)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addUser(user: User)
+
+    @Query("SELECT * FROM USER WHERE USER._id == :id")
+    suspend fun findWithId(id:String): List<User>
 
 }

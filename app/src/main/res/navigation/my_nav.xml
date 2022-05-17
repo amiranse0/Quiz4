@@ -11,6 +11,11 @@
         <action
             android:id="@+id/action_homeFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_userDBFragment"
+            app:destination="@id/userDBFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -19,5 +24,15 @@
         <argument
             android:name="userDetail"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/userDBFragment"
+        android:name="com.example.quiz4.ui.dbui.UserDBFragment"
+        android:label="UserDBFragment" >
+        <action
+            android:id="@+id/action_userDBFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/userDBFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

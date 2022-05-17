@@ -61,4 +61,8 @@ class UserRepository(
         }
     }
 
+    suspend fun deleteUser(id:String){
+        localDataSource.deleteUser(id)
+    }
+
 }

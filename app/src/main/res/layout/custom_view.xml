@@ -5,11 +5,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="75dp">
 
         <TextView
             android:id="@+id/text_view"
             android:gravity="center_horizontal"
+            android:textSize="20sp"
+            android:backgroundTint="#a0f"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 

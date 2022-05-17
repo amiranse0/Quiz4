@@ -1,6 +1,7 @@
 package com.example.quiz4.data.local
 
 import androidx.room.Entity
+import androidx.room.OnConflictStrategy
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "User")
